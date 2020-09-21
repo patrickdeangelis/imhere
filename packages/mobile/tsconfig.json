@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "lib": ["dom", "esnext"],
+    "checkJs": false,
+    "allowJs": false
+  },
+  "include": ["./src/**/*", "src/App.tsx"]
+}
