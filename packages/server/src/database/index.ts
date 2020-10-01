@@ -9,7 +9,7 @@ createConnection({
   database: 'projectLab',
   synchronize: true,
   logging: false,
-  entities: ['src/entity/**/*.ts'],
+  entities: ['src/models/**/*.ts'],
   migrations: ['src/migration/**/*.ts'],
   subscribers: ['src/subscriber/**/*.ts'],
   cli: {
