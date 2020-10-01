@@ -1,6 +1,5 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
@@ -25,4 +24,10 @@ export class SchoolSubject {
 
   @ManyToOne(type => User, User => user => user.schoolSubject)
   user: User
+
+  @CreateDateColumn()
+  created_at: Date
+
+  @UpdateDateColumn()
+  updated_at: Date
 }
