@@ -5,6 +5,7 @@
    "license": "MIT",
    "scripts": {
       "start": "tsnd --respawn --inspect --transpile-only --ignore-watch node_modules ./src/server.ts",
+      "type": "tsnd ./node_modules/typeorm/cli.js",
       "test": ""
    },
    "dependencies": {
