@@ -12,16 +12,16 @@ export class User {
   id: string
 
   @Column()
-  firstName: string
+  nameUser: string
 
   @Column()
-  lastName: string
+  email: string
 
   @Column()
   password: string
 
   @Column()
-  age: number
+  isProfessor: boolean
 
   @CreateDateColumn()
   created_at: Date

@@ -5,12 +5,12 @@ const userRoutes = Router()
 
 userRoutes.post('/add', async (request, response) => {
   try {
-    const { firstName, lastName, age, password } = request.body
+    const { nameUser, email, isProfessor, password } = request.body
     const createUser = new CreateUsersServices()
     const user = await createUser.execute({
-      firstName,
-      lastName,
-      age,
+      nameUser,
+      email,
+      isProfessor,
       password
     })
     delete user.password

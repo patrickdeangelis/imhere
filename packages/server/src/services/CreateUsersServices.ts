@@ -3,31 +3,31 @@ import { hash } from 'bcryptjs'
 import User from '../models/User'
 
 interface Request {
-  firstName: string
-  lastName: string
-  age: number
+  nameUser: string
+  email: string
+  isProfessor: boolean
   password: string
 }
 
 class CreateUsersServices {
   public async execute({
-    firstName,
-    lastName,
-    age,
+    nameUser,
+    email,
+    isProfessor,
     password
   }: Request): Promise<User> {
     const userRepo = getRepository(User)
     const checkUser = await userRepo.findOne({
-      where: { firstName, lastName }
+      where: { email }
     })
     if (checkUser) {
       throw new Error('User already exists...')
     }
     const hashPass = await hash(password, 12)
     const user = userRepo.create({
-      firstName,
-      lastName,
-      age,
+      nameUser,
+      email,
+      isProfessor,
       password: hashPass
     })
     await userRepo.save(user)
