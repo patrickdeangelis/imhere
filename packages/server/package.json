@@ -4,7 +4,8 @@
   "main": "./src/server.ts",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --transpile-only ./src/server.ts"
+    "start": "ts-node-dev --transpile-only ./src/server.ts",
+    "test": ""
   },
   "dependencies": {
     "cors": "^2.8.5",
