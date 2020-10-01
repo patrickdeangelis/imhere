@@ -1,10 +1,13 @@
+import { type } from 'os'
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  OneToMany
 } from 'typeorm'
+import { SchoolSubject } from './SchoolSubject'
 
 @Entity()
 export class User {
@@ -18,13 +21,13 @@ export class User {
   email: string
 
   @Column()
-  email: string
-
-  @Column()
   password: string
 
   @Column()
   isProfessor: boolean
+
+  @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.user)
+  schoolSubject: SchoolSubject
 
   @CreateDateColumn()
   created_at: Date
