@@ -5,11 +5,12 @@ const userRoutes = Router()
 
 userRoutes.post('/add', async (request, response) => {
   try {
-    const { firstName, lastName, age, password } = request.body
+    const { firstName, lastName, email, age, password } = request.body
     const createUser = new CreateUsersServices()
     const user = await createUser.execute({
       firstName,
       lastName,
+      email,
       age,
       password
     })

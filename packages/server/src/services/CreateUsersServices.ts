@@ -4,6 +4,7 @@ import User from '../models/User'
 
 interface Request {
   firstName: string
+  email: string
   lastName: string
   age: number
   password: string
@@ -13,20 +14,22 @@ class CreateUsersServices {
   public async execute({
     firstName,
     lastName,
+    email,
     age,
     password
   }: Request): Promise<User> {
     const userRepo = getRepository(User)
     const checkUser = await userRepo.findOne({
-      where: { firstName, lastName }
+      where: { email }
     })
     if (checkUser) {
-      throw new Error('User already exists...')
+      throw new Error('Email already exists...')
     }
     const hashPass = await hash(password, 12)
     const user = userRepo.create({
       firstName,
       lastName,
+      email,
       age,
       password: hashPass
     })
