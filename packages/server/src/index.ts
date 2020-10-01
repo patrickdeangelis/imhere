@@ -4,7 +4,7 @@ import { User } from './models/User'
 
 createConnection({
   type: 'postgres',
-  host: 'http://192.168.99.101/',
+  host: '192.168.99.101',
   port: 5432,
   username: 'docker',
   password: 'docker',
@@ -15,7 +15,7 @@ createConnection({
   migrations: ['src/migration/**/*.ts'],
   subscribers: ['src/subscriber/**/*.ts'],
   cli: {
-    entitiesDir: 'src/entity',
+    entitiesDir: 'src/models',
     migrationsDir: 'src/migration',
     subscribersDir: 'src/subscriber'
   }
