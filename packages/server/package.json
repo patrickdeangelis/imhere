@@ -4,11 +4,12 @@
    "main": "./src/server.ts",
    "license": "MIT",
    "scripts": {
-      "start": "ts-node src/index.ts",
+      "start": "tsnd --respawn --inspect --transpile-only --ignore-watch node_modules ./src/server.ts",
       "test": ""
    },
    "dependencies": {
       "cors": "^2.8.5",
+      "dotenv": "^8.2.0",
       "express": "^4.17.1",
       "mysql": "^2.14.1",
       "pg": "^8.3.3",
