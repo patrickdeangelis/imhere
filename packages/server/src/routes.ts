@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 const router = Router()
 
-//apenas teste
+//  apenas teste
 router.get('/', (req, res) => {
   res.json('hello world!')
 })

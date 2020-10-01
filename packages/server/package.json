@@ -1,19 +1,27 @@
 {
-  "name": "@imhere/server",
-  "version": "1.0.0",
-  "main": "./src/server.ts",
-  "license": "MIT",
-  "scripts": {
-    "start": "ts-node-dev --transpile-only ./src/server.ts",
-    "test": ""
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.7",
-    "nodemon": "^2.0.4",
-    "ts-node-dev": "^1.0.0-pre.60"
-  }
+   "name": "@imhere/server",
+   "version": "1.0.0",
+   "main": "./src/server.ts",
+   "license": "MIT",
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "test": ""
+   },
+   "dependencies": {
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "mysql": "^2.14.1",
+      "pg": "^8.3.3",
+      "reflect-metadata": "^0.1.13",
+      "typeorm": "0.2.28"
+   },
+   "devDependencies": {
+      "@types/express": "^4.17.7",
+      "@types/node": "^8.0.29",
+      "nodemon": "^2.0.4",
+      "ts-node": "3.3.0",
+      "ts-node-dev": "^1.0.0-pre.60",
+      "typeorm-cli": "^1.0.7",
+      "typescript": "3.3.3333"
+   }
 }
