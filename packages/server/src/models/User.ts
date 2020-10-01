@@ -17,7 +17,7 @@ export class User {
   id: number
 
   @Column()
-  nameUser: string
+  name: string
 
   @Column()
   email: string
