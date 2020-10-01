@@ -4,7 +4,7 @@
    "main": "./src/server.ts",
    "license": "MIT",
    "scripts": {
-      "start": "ts-node src/index.ts",
+      "start": "tsnd --respawn --inspect --transpile-only --ignore-watch node_modules ./src/server.ts",
       "test": ""
    },
    "dependencies": {
