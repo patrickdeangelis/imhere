@@ -3,15 +3,15 @@ import { hash } from 'bcryptjs'
 import User from '../models/User'
 
 interface Request {
-  nameUser: string
+  name: string
   email: string
   isProfessor: boolean
   password: string
 }
 
 class CreateUsersServices {
-  public async execute({
-    nameUser,
+  public async execute ({
+    name,
     email,
     isProfessor,
     password
@@ -25,7 +25,7 @@ class CreateUsersServices {
     }
     const hashPass = await hash(password, 12)
     const user = userRepo.create({
-      nameUser,
+      name,
       email,
       isProfessor,
       password: hashPass

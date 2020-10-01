@@ -2,7 +2,7 @@ import { createConnection } from 'typeorm'
 
 createConnection({
   type: 'postgres',
-  host: '192.168.99.101',
+  host: 'localhost',
   port: 5432,
   username: 'docker',
   password: 'docker',
@@ -10,11 +10,11 @@ createConnection({
   synchronize: true,
   logging: false,
   entities: ['src/models/**/*.ts'],
-  migrations: ['src/migration/**/*.ts'],
-  subscribers: ['src/subscriber/**/*.ts'],
+  migrations: ['src/models/migration/**/*.ts'],
+  subscribers: ['src/models/subscriber/**/*.ts'],
   cli: {
     entitiesDir: 'src/models',
-    migrationsDir: 'src/migration',
-    subscribersDir: 'src/subscriber'
+    migrationsDir: 'src/models/migration',
+    subscribersDir: 'src/models/subscriber'
   }
 })
