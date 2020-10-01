@@ -7,12 +7,14 @@ import {
   UpdateDateColumn,
   OneToMany
 } from 'typeorm'
+import Registered from './Registered'
 import { SchoolSubject } from './SchoolSubject'
+import { Validations } from './Validations'
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id: number
 
   @Column()
   nameUser: string
@@ -28,6 +30,12 @@ export class User {
 
   @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.user)
   schoolSubject: SchoolSubject
+
+  @OneToMany(type => Validations, validations => validations.user)
+  validations: Validations
+
+  @OneToMany(type => Registered, registered => registered.user)
+  registered: Registered
 
   @CreateDateColumn()
   created_at: Date
