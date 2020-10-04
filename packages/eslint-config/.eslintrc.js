@@ -23,7 +23,10 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
-    'prettier/prettier': 'error'
+    'prettier/prettier': 'error',
+    camelcase: 'off',
+    '@typescript-eslint/no-unused-vars': 'off'
+    "space-before-function-paren": "off"
   },
   settings: {
     'import/resolver': {

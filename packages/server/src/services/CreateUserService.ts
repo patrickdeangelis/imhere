@@ -9,8 +9,8 @@ interface Request {
   password: string
 }
 
-class CreateUsersServices {
-  public async execute ({
+class CreateUserService {
+  public async execute({
     name,
     email,
     isProfessor,
@@ -20,9 +20,11 @@ class CreateUsersServices {
     const checkUser = await userRepo.findOne({
       where: { email }
     })
+
     if (checkUser) {
       throw new Error('Email already exists...')
     }
+
     const hashPass = await hash(password, 12)
     const user = userRepo.create({
       name,
@@ -30,9 +32,11 @@ class CreateUsersServices {
       isProfessor,
       password: hashPass
     })
+
     await userRepo.save(user)
+
     return user
   }
 }
 
-export default CreateUsersServices
+export default CreateUserService
