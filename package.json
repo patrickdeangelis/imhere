@@ -8,6 +8,9 @@
       "packages/*"
     ]
   },
+  "scripts": {
+    "test": "jest"
+  },
   "license": "MIT",
   "devDependencies": {
     "@imhere/eslint-config": "*",
