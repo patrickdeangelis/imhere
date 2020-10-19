@@ -19,7 +19,7 @@ export class SchoolSubject {
   id_SchoolSubject: string
 
   @Column()
-  name: string
+  schoolsubject: string
 
   @Column('text')
   description: string
@@ -27,13 +27,13 @@ export class SchoolSubject {
   @Column()
   workloader: number
 
-  @ManyToOne(type => User, user => user.schoolSubject)
-  user: User
+  @ManyToOne(type => User, professor => professor.schoolSubject)
+  professor: User
 
   @OneToMany(type => Class, classes => classes.schoolSubject)
   classes: Class
 
-  @ManyToMany(type => User, student => student.schoolsubject) 
+  @ManyToMany(type => User, student => student.registered) 
   student: User
 
   @CreateDateColumn()

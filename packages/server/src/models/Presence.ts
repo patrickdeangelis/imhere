@@ -39,7 +39,7 @@ export class Presence {
   @Column()
   F_finish: string
 
-  @ManyToOne(type => User, user => user.validations)
+  @ManyToOne(type => User, user => user.presence)
   user: User
 
   @ManyToOne(type => Class, classes => classes.presence)

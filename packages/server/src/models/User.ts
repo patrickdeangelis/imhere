@@ -30,13 +30,13 @@ export class User {
   @Column()
   isProfessor: boolean
 
-  @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.user)
+  @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.professor)
   schoolSubject: SchoolSubject
 
   @OneToMany(type => Presence, presence => presence.user)
   presence: Presence
   
-  @ManyToMany(type => SchoolSubject, registered => registered.user)
+  @ManyToMany(type => SchoolSubject, registered => registered.student)
   @JoinTable()
   registered: SchoolSubject
 
