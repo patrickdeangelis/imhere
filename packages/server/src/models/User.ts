@@ -8,6 +8,7 @@ import {
   ManyToMany,
   OneToMany,
   JoinTable,
+  Unique,
 } from 'typeorm'
 import { SchoolSubject } from './SchoolSubject'
 import { Presence } from './Presence'
@@ -20,7 +21,7 @@ export class User {
   @Column()
   name: string
 
-  @Column()
+  @Column({unique: true})
   email: string
 
   @Column()
