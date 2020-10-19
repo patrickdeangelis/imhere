@@ -11,7 +11,7 @@ interface Request {
 }
 
 class CreateSchoolSubjectService {
-  public async execute({email, schoolsubject, description, workload}: Request): Promise<Response> {
+  public async execute({email, schoolsubject, description, workload}: Request): Promise<SchoolSubject> {
     const userRepo = getRepository(User)
     const SJRepo = getRepository(SchoolSubject)
     const user = await userRepo.findOne({ where: email})
@@ -21,13 +21,12 @@ class CreateSchoolSubjectService {
     if(!user.isProfessor){
       throw new Error('User is not professor ...')
     }
-    const professor = user.id
-    const Discipline = SJRepo.Create({
+    const professor = user.id_user
+    const Discipline = SJRepo.create({
       schoolsubject,
       description,
       workload,
       professor
-
     })
 
     await SJRepo.save(Discipline)
