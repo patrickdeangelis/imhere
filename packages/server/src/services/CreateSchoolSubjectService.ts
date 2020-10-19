@@ -1,38 +1,56 @@
 import User from "../models/User"
 import SchoolSubject from "../models/SchoolSubject"
 import { getRepository } from "typeorm"
-import { deflate } from "zlib"
+import randomstring from 'randomstring'
 
 interface Request {
+  id: String
   email: String
   schoolsubject: String
   description: String
-  workload: Number
+  workloader: Number
+  professor: String
 }
 
 class CreateSchoolSubjectService {
-  public async execute({email, schoolsubject, description, workload}: Request): Promise<Response> {
-    const userRepo = getRepository(User)
-    const SJRepo = getRepository(SchoolSubject)
-    const user = await userRepo.findOne({ where: email})
-    if(!user){
-      throw new Error('Professor not exist ...')
-    }
-    if(!user.isProfessor){
-      throw new Error('User is not professor ...')
-    }
-    const professor = user.id
-    const Discipline = SJRepo.Create({
-      schoolsubject,
-      description,
-      workload,
-      professor
+  public async execute({
+    email,
+    schoolsubject,
+    description,
+    workloader,
+    professor,
+    id }: Request): Promise<SchoolSubject> {
 
+    const userRepo = getRepository(User)
+    const SjRepo = getRepository(SchoolSubject)
+
+    const checkUserEmail = await userRepo.findOne({
+      where: { email }
     })
 
-    await SJRepo.save(Discipline)
+    if (!checkUserEmail) {
+      throw new Error('Professor not exist ...')
+    }
+    if (!checkUserEmail.isProfessor) {
+      throw new Error('User is not professor ...')
+    }
 
-    return Discipline
+    const codeSchool = randomstring.generate({
+      length: 6,
+      charset: 'alphabetic'
+    });
+    const professorOwen = checkUserEmail.id_user
+    const discipline = SjRepo.create({
+      id: codeSchool,
+      description,
+      schoolsubject,
+      workloader,
+      professor: professorOwen
+    })
+
+    await SjRepo.save(discipline)
+
+    return discipline
   }
 }
 

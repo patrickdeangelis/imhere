@@ -5,19 +5,19 @@ const schoolSubjectRouter = Router()
 
 schoolSubjectRouter.post("/add", (request, response) => {
   try {
-    const {email, schoolsubject, description, workload} = request.body
+    const { email, schoolsubject, description, workloader } = request.body
     const createSchoolSubject = new CreateSchoolSubjectService()
     const discipline = createSchoolSubject.execute({
       email,
       schoolsubject,
       description,
-      workload
+      workloader
     })
-    
+    // const { id_s }
     return response.json(discipline)
   }
 
-  catch {
+  catch (err) {
     return response.status(400).json({ error: err.message })
   }
 })

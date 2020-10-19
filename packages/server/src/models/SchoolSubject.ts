@@ -16,7 +16,7 @@ import User from './User'
 @Entity()
 export class SchoolSubject {
   @PrimaryColumn('varchar')
-  id_SchoolSubject: string
+  id: string
 
   @Column()
   schoolsubject: string
@@ -33,7 +33,7 @@ export class SchoolSubject {
   @OneToMany(type => Class, classes => classes.schoolSubject)
   classes: Class
 
-  @ManyToMany(type => User, student => student.registered) 
+  @ManyToMany(type => User, student => student.registered)
   student: User
 
   @CreateDateColumn()
