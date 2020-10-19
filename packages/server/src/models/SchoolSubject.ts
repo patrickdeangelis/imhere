@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
   ManyToMany
@@ -15,17 +16,22 @@ import User from './User'
 
 @Entity()
 export class SchoolSubject {
+<<<<<<< HEAD
   @PrimaryColumn('varchar')
   id: string
+=======
+  @PrimaryGeneratedColumn('uuid')
+  id_SchoolSubject: string
+>>>>>>> 0b7ce62ba7865f9c57ac2ce4eb43d462eef24ca0
 
-  @Column()
+  @Column('text')
   schoolsubject: string
 
   @Column('text')
   description: string
 
   @Column()
-  workloader: number
+  workload: number
 
   @ManyToOne(type => User, professor => professor.schoolSubject)
   professor: User

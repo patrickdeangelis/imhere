@@ -13,6 +13,7 @@ interface Request {
 }
 
 class CreateSchoolSubjectService {
+<<<<<<< HEAD
   public async execute({
     email,
     schoolsubject,
@@ -21,6 +22,9 @@ class CreateSchoolSubjectService {
     professor,
     id }: Request): Promise<SchoolSubject> {
 
+=======
+  public async execute({email, schoolsubject, description, workload}: Request): Promise<SchoolSubject> {
+>>>>>>> 0b7ce62ba7865f9c57ac2ce4eb43d462eef24ca0
     const userRepo = getRepository(User)
     const SjRepo = getRepository(SchoolSubject)
 
@@ -34,6 +38,7 @@ class CreateSchoolSubjectService {
     if (!checkUserEmail.isProfessor) {
       throw new Error('User is not professor ...')
     }
+<<<<<<< HEAD
 
     const codeSchool = randomstring.generate({
       length: 6,
@@ -46,6 +51,14 @@ class CreateSchoolSubjectService {
       schoolsubject,
       workloader,
       professor: professorOwen
+=======
+    const professor = user.id_user
+    const Discipline = SJRepo.create({
+      schoolsubject,
+      description,
+      workload,
+      professor
+>>>>>>> 0b7ce62ba7865f9c57ac2ce4eb43d462eef24ca0
     })
 
     await SjRepo.save(discipline)

@@ -28,7 +28,7 @@ class SessionUserService {
     }
 
     const token = sign({}, authConfig.jwt.secret, {
-      subject: user.id,
+      subject: user.id_user,
       expiresIn: authConfig.jwt.expired
     })
 
