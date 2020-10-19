@@ -37,7 +37,7 @@ export class User {
   
   @ManyToMany(type => SchoolSubject, registered => registered.user)
   @JoinTable()
-  registered: SchoolSubject[]
+  registered: SchoolSubject
 
   @CreateDateColumn()
   created_at: Date

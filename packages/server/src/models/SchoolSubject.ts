@@ -34,7 +34,7 @@ export class SchoolSubject {
   classes: Class
 
   @ManyToMany(type => User, student => student.schoolsubject) 
-  student: User[]
+  student: User
 
   @CreateDateColumn()
   created_at: Date
