@@ -16,7 +16,7 @@ import User from './User'
 @Entity()
 export class SchoolSubject {
   @PrimaryColumn('varchar')
-  id: string
+  id_SchoolSubject: string
 
   @Column()
   name: string

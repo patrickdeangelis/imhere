@@ -13,7 +13,7 @@ import { Presence } from './Presence'
 @Entity()
 export class Class {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id_class: number
 
   @Column('date')
   date_class: Date
