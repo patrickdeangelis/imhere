@@ -8,12 +8,12 @@ import {
 } from 'typeorm'
 import SchoolSubject from './SchoolSubject'
 import User from './User'
-import Classes from './Classes'
+import Class from './Class'
 
 @Entity()
-export class Validations {
+export class Presence {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id_presence: number
 
   @Column('text')
   justification: string
@@ -42,8 +42,8 @@ export class Validations {
   @ManyToOne(type => User, user => user.validations)
   user: User
 
-  @ManyToOne(type => Classes, classes => classes.validations)
-  classes: Classes
+  @ManyToOne(type => Class, classes => classes.presence)
+  classes: Class
 
   @CreateDateColumn()
   created_at: Date
@@ -51,4 +51,4 @@ export class Validations {
   @UpdateDateColumn()
   updated_at: Date
 }
-export default Validations
+export default Presence

@@ -9,8 +9,8 @@ import {
   OneToMany,
   ManyToMany
 } from 'typeorm'
-import { Classes } from './Classes'
-import { Registered } from './Registered'
+import { Class } from './Class'
+
 import User from './User'
 
 @Entity()
@@ -30,11 +30,11 @@ export class SchoolSubject {
   @ManyToOne(type => User, user => user.schoolSubject)
   user: User
 
-  @OneToMany(type => Classes, classes => classes.schoolSubject)
-  classes: Classes
+  @OneToMany(type => Class, classes => classes.schoolSubject)
+  classes: Class
 
-  @OneToMany(type => Registered, registered => registered.schoolSubject)
-  registered: Registered
+  @ManyToMany(type => User, student => student.schoolsubject) 
+  student: User[]
 
   @CreateDateColumn()
   created_at: Date

@@ -8,10 +8,10 @@ import {
   OneToMany
 } from 'typeorm'
 import { SchoolSubject } from './SchoolSubject'
-import { Validations } from './Validations'
+import { Presence } from './Presence'
 
 @Entity()
-export class Classes {
+export class Class {
   @PrimaryGeneratedColumn('uuid')
   id: number
 
@@ -30,8 +30,8 @@ export class Classes {
   @ManyToOne(type => SchoolSubject, schoolSubject => schoolSubject.classes)
   schoolSubject: SchoolSubject
 
-  @OneToMany(type => Validations, validations => validations.classes)
-  validations: Validations
+  @OneToMany(type => Presence, presence => presence.classes)
+  presence: Presence
 
   @CreateDateColumn()
   created_at: Date
@@ -39,4 +39,4 @@ export class Classes {
   @UpdateDateColumn()
   updated_at: Date
 }
-export default Classes
+export default Class
