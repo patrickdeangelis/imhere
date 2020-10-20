@@ -1,7 +1,15 @@
 import { Router } from "express"
 import CreateSchoolSubjectService from "../services/CreateSchoolSubjectService"
+import SchoolSubject from '../models/SchoolSubject'
+import { getRepository } from 'typeorm'
 
 const schoolSubjectRouter = Router()
+
+schoolSubjectRouter.get('/', async (request, response) => {
+  const schoolRepo = getRepository(SchoolSubject);
+  const schools = await schoolRepo.find();
+  return response.json(schools);
+});
 
 schoolSubjectRouter.post("/add", (request, response) => {
   try {
