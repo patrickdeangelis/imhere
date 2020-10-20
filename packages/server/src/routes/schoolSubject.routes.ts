@@ -2,8 +2,10 @@ import { Router } from "express"
 import CreateSchoolSubjectService from "../services/CreateSchoolSubjectService"
 import SchoolSubject from '../models/SchoolSubject'
 import { getRepository } from 'typeorm'
+import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 
 const schoolSubjectRouter = Router()
+schoolSubjectRouter.use(ensureAuthenticated)
 
 schoolSubjectRouter.get('/', async (request, response) => {
   const schoolRepo = getRepository(SchoolSubject);
