@@ -9,4 +9,5 @@ routes.use('/users', userRoutes)
 routes.use('/sessions', sessionRoutes)
 routes.use('/schoolsubject', schoolSubjectRouter)
 
+
 export default routes

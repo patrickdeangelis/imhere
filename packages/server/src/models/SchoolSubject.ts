@@ -30,13 +30,13 @@ export class SchoolSubject {
   @Column()
   workloader: number
 
-  @ManyToOne(type => User, professor => professor.schoolSubject)
+  @ManyToOne(type => User, professor => professor.schoolSubject, {  onDelete: "CASCADE" })
   professor: User
 
   @OneToMany(type => Class, classes => classes.schoolSubject, { nullable: true })
   classes: Class
 
-  @ManyToMany(type => User, student => student.registered, { nullable: true })
+  @ManyToMany(type => User, student => student.registered, { nullable: true, onDelete: "SET NULL" })
   student: User
 
   @CreateDateColumn()

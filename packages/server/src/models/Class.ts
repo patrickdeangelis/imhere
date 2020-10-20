@@ -27,7 +27,7 @@ export class Class {
   @Column()
   tolerance: number
 
-  @ManyToOne(type => SchoolSubject, schoolSubject => schoolSubject.classes)
+  @ManyToOne(type => SchoolSubject, schoolSubject => schoolSubject.classes, { onDelete: "CASCADE" })
   schoolSubject: SchoolSubject
 
   @OneToMany(type => Presence, presence => presence.classes)

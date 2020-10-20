@@ -51,7 +51,7 @@ class CreateSchoolSubjectService {
     })
 
     await SjRepo.save(discipline)
-
+    console.log(discipline)
     return discipline
   }
 }

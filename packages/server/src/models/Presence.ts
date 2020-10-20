@@ -39,10 +39,10 @@ export class Presence {
   @Column()
   F_finish: string
 
-  @ManyToOne(type => User, user => user.presence)
+  @ManyToOne(type => User, user => user.presence, { onDelete: "SET NULL" })
   user: User
 
-  @ManyToOne(type => Class, classes => classes.presence)
+  @ManyToOne(type => Class, classes => classes.presence, { onDelete: "CASCADE"})
   classes: Class
 
   @CreateDateColumn()
