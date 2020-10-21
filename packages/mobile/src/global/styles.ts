@@ -4,6 +4,7 @@ import globalColors from './colors'
 export const TextCustomFont = styled.Text`
   font-family: RubikOne;
   font-size: 20px;
+  margin-bottom: 5px;
 `
 export const BaseContainer = styled.View`
   flex: 1;
