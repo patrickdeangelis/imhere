@@ -5,21 +5,24 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
   ManyToMany
 } from 'typeorm'
-import { Classes } from './Classes'
-import { Registered } from './Registered'
+import { isNullOrUndefined } from 'util'
+import { Class } from './Class'
+
 import User from './User'
 
 @Entity()
 export class SchoolSubject {
+
   @PrimaryColumn('varchar')
   id: string
 
-  @Column()
-  name: string
+  @Column('text')
+  schoolsubject: string
 
   @Column('text')
   description: string
@@ -27,14 +30,14 @@ export class SchoolSubject {
   @Column()
   workloader: number
 
-  @ManyToOne(type => User, user => user.schoolSubject)
-  user: User
+  @ManyToOne(type => User, professor => professor.schoolSubject, {  onDelete: "CASCADE" })
+  professor: User
 
-  @OneToMany(type => Classes, classes => classes.schoolSubject)
-  classes: Classes
+  @OneToMany(type => Class, classes => classes.schoolSubject, { nullable: true })
+  classes: Class
 
-  @OneToMany(type => Registered, registered => registered.schoolSubject)
-  registered: Registered
+  @ManyToMany(type => User, student => student.registered, { nullable: true, onDelete: "SET NULL" })
+  student: User
 
   @CreateDateColumn()
   created_at: Date

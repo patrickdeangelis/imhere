@@ -2,11 +2,11 @@ import { createConnection } from 'typeorm'
 
 createConnection({
   type: 'postgres',
-  host: 'localhost',
+  host: '192.168.99.101',
   port: 5432,
   username: 'docker',
   password: 'docker',
-  database: 'projectLab',
+  database: 'projectLab3',
   synchronize: true,
   logging: false,
   entities: ['src/models/**/*.ts'],

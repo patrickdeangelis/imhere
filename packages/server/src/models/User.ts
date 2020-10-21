@@ -5,21 +5,23 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  ManyToMany,
+  OneToMany,
+  JoinTable,
+  Unique,
 } from 'typeorm'
-import Registered from './Registered'
 import { SchoolSubject } from './SchoolSubject'
-import { Validations } from './Validations'
+import { Presence } from './Presence'
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id_user: string
 
   @Column()
   name: string
 
-  @Column()
+  @Column({unique: true})
   email: string
 
   @Column()
@@ -28,14 +30,15 @@ export class User {
   @Column()
   isProfessor: boolean
 
-  @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.user)
+  @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.professor)
   schoolSubject: SchoolSubject
 
-  @OneToMany(type => Validations, validations => validations.user)
-  validations: Validations
-
-  @OneToMany(type => Registered, registered => registered.user)
-  registered: Registered
+  @OneToMany(type => Presence, presence => presence.user)
+  presence: Presence
+  
+  @ManyToMany(type => SchoolSubject, registered => registered.student)
+  @JoinTable()
+  registered: SchoolSubject
 
   @CreateDateColumn()
   created_at: Date

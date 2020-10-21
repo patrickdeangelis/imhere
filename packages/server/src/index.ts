@@ -8,7 +8,7 @@ createConnection({
   port: 5432,
   username: 'docker',
   password: 'docker',
-  database: 'projectLab',
+  database: 'projectLab3',
   synchronize: true,
   logging: false,
   entities: ['src/entity/**/*.ts'],
