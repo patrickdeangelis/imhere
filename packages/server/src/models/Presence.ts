@@ -6,14 +6,14 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne
 } from 'typeorm'
-import SchoolSubject from './SchoolSubject'
+import Discipline from './Discipline'
 import User from './User'
 import Class from './Class'
 
 @Entity()
 export class Presence {
   @PrimaryGeneratedColumn('uuid')
-  id_presence: number
+  id_presence: string
 
   @Column('text')
   justification: string

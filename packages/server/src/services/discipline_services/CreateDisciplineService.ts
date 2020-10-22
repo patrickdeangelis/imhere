@@ -1,29 +1,29 @@
-import User from "../models/User"
-import SchoolSubject from "../models/SchoolSubject"
+import User from "../../models/User"
+import Discipline from "../../models/Discipline"
 import { getRepository } from "typeorm"
 import randomstring from 'randomstring'
 
 interface Request {
   id: String
   email: String
-  schoolsubject: String
+  discipline: String
   description: String
   workloader: Number
   professor: String
 }
 
-class CreateSchoolSubjectService {
+class CreateDisciplineService {
 
   public async execute({
     email,
-    schoolsubject,
+    discipline,
     description,
     workloader,
     professor,
-    id }: Request): Promise<SchoolSubject> {
+    id }: Request): Promise<Discipline> {
 
     const userRepo = getRepository(User)
-    const SjRepo = getRepository(SchoolSubject)
+    const SjRepo = getRepository(Discipline)
 
     const checkUserEmail = await userRepo.findOne({
       where: { email }
@@ -42,18 +42,18 @@ class CreateSchoolSubjectService {
     });
     const professorOwen = checkUserEmail.id_user
 
-    const discipline = SjRepo.create({
-      id: codeSchool,
+    const newDiscipline = SjRepo.create({
+      id_discipline: codeSchool,
       description,
-      schoolsubject,
+      discipline,
       workloader,
       professor: professorOwen
     })
 
-    await SjRepo.save(discipline)
-    console.log(discipline)
-    return discipline
+    await SjRepo.save(newDiscipline)
+    console.log(newDiscipline)
+    return newDiscipline
   }
 }
 
-export default CreateSchoolSubjectService
+export default CreateDisciplineService

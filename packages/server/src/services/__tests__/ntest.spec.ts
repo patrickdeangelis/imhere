@@ -1,4 +1,4 @@
-import CreateUserService from '../CreateUserService'
+import CreateUserService from '../user_services/CreateUserService'
 
 const userService = new CreateUserService()
 

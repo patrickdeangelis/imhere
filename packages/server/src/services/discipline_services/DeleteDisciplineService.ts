@@ -1,4 +1,4 @@
-import SchoolSubject from '../models/SchoolSubject'
+import Discipline from '../../models/Discipline'
 import { getRepository } from "typeorm"
 
 interface Request {
@@ -7,12 +7,12 @@ interface Request {
 interface Response {
   deleted: boolean
 }
-class DeleteSchoolSubjectService{
+class DeleteDisciplineService{
   public async execute({ id }: Request): Promise<Response>  {
-    const SjRepo = getRepository(SchoolSubject)
+    const SjRepo = getRepository(Discipline)
     const discipline = await SjRepo.findOne({ where: {  id  }})
     if(!discipline){
-      throw new Error('Error to find SchoolSubject in database')
+      throw new Error('Error to find discipline in database')
     }
 
     try {
@@ -27,4 +27,4 @@ class DeleteSchoolSubjectService{
   }
 }
 
-export default DeleteSchoolSubjectService
+export default DeleteDisciplineService

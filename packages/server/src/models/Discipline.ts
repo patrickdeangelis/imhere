@@ -16,13 +16,13 @@ import { Class } from './Class'
 import User from './User'
 
 @Entity()
-export class SchoolSubject {
+export class Discipline {
 
   @PrimaryColumn('varchar')
-  id: string
+  id_discipline: string
 
   @Column('text')
-  schoolsubject: string
+  discipline: string
 
   @Column('text')
   description: string
@@ -30,10 +30,10 @@ export class SchoolSubject {
   @Column()
   workloader: number
 
-  @ManyToOne(type => User, professor => professor.schoolSubject, {  onDelete: "CASCADE" })
+  @ManyToOne(type => User, professor => professor.discipline, {  onDelete: "CASCADE" })
   professor: User
 
-  @OneToMany(type => Class, classes => classes.schoolSubject, { nullable: true })
+  @OneToMany(type => Class, classes => classes.discipline, { nullable: true })
   classes: Class
 
   @ManyToMany(type => User, student => student.registered, { nullable: true, onDelete: "SET NULL" })
@@ -46,4 +46,4 @@ export class SchoolSubject {
   updated_at: Date
 }
 
-export default SchoolSubject
+export default Discipline
