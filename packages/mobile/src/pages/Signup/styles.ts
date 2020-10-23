@@ -13,17 +13,14 @@ export const RegisterButton = styled.TouchableHighlight`
 `
 export const SwitchOption = styled.Switch`
   margin-bottom: 20px;
-
 `
 export const Title = styled.View`
   margin-bottom: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
 `
 export const TeacherOption = styled.View`
   margin-bottom: 20px;
-  display: flex;
   justify-content: center;
   align-items: baseline;
 `
