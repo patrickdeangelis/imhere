@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import globalColors from '../../global/colors'
 import { TextCustomFont } from '../../global/styles'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   background-color: ${globalColors.green};
   color: ${globalColors.black};
   align-items: center;

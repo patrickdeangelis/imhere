@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native'
 import { Form } from '@unform/mobile'
 
 import { useNavigation } from '@react-navigation/native'
-import CustomButton from '../../components/CustomButton'
+import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 import Input from '../../components/Input'
 import { TextCustomFont, CustomTextInput } from '../../global/styles'
@@ -33,7 +33,7 @@ const SignUp: React.FC = () => {
               Cadastro
             </TextCustomFont>
           </Title>
-          <Form>
+          <Form onSubmit={() => ''}>
             <Input name="Nome" placeholder="Nome" />
             <Input name="Email" placeholder="Email" />
             <Input name="Senha" placeholder="Senha" secureTextEntry />
@@ -49,7 +49,9 @@ const SignUp: React.FC = () => {
                 value={isEnabled}
               />
             </TeacherOption>
-            <CustomButton title="Cadastrar" onPress={() => ''} />
+            <Button title="Cadastrar" onPress={() => console.log('Cadastro')}>
+              Casastrar
+            </Button>
           </Form>
           <RegisterButton
             onPress={() => {

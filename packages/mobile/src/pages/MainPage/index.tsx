@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { TextCustomFont, CustomTextInput } from '../../global/styles'
 import { Container, RegisterButton } from './styles'
-import CustomButton from '../../components/CustomButton'
+import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 
 const MainPage: React.FC = () => {

@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
-import CustomButton from '../../components/CustomButton'
+import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Logo from '../../components/Logo'
 import { TextCustomFont } from '../../global/styles'
@@ -28,14 +28,16 @@ const SignIn: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSignIn}>
             <Input name="Email" placeholder="Email" />
             <Input name="Senha" placeholder="Senha" secureTextEntry />
-            <CustomButton
+            <Button
               title="Login"
-              onPress={() => { formRef.current?.submitForm() }}
-            />
+              onPress={() => { formRef.current?.submitForm() }}>
+              Login
+            </Button>
           </Form>
           <RegisterButton
             onPress={() => {
               navigation.navigate('SignUp')
+              console.log('SingUp')
             }}
           >
             <TextCustomFont style={{ color: '#00FF00' }}>
