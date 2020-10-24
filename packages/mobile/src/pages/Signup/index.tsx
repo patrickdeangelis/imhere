@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useRef } from 'react'
-import { View, ScrollView } from 'react-native'
+import React, { useCallback, useRef } from 'react'
+import { View, ScrollView, TextInput } from 'react-native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
 import { useNavigation } from '@react-navigation/native'
@@ -7,12 +7,14 @@ import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 import Input from '../../components/Input'
 import Switch from '../../components/Switch'
-import { TextCustomFont, CustomTextInput } from '../../global/styles'
+import { TextCustomFont } from '../../global/styles'
 import { Container, RegisterButton, Title } from './styles'
 
 const SignUp: React.FC = () => {
   const navigation = useNavigation()
   const formRef = useRef<FormHandles>(null)
+  const emailInputRef = useRef<TextInput>(null)
+  const passwordInputRef = useRef<TextInput>(null)
   // eslint-disable-next-line @typescript-eslint/ban-types
   const handleSignIn = useCallback((data: object) => {
     console.log(data)
@@ -38,9 +40,38 @@ const SignUp: React.FC = () => {
               console.log(data)
             }}
           >
-            <Input name="Nome" placeholder="Nome" />
-            <Input name="Email" placeholder="Email" />
-            <Input name="Senha" placeholder="Senha" secureTextEntry />
+            <Input
+              autoCapitalize="words"
+              name="Nome"
+              placeholder="Nome"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                emailInputRef.current.focus()
+              }}
+            />
+            <Input
+              ref={emailInputRef}
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              name="Email"
+              placeholder="Email"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordInputRef.current.focus()
+              }}
+            />
+            <Input
+              ref={passwordInputRef}
+              name="Senha"
+              placeholder="Senha"
+              secureTextEntry
+              textContentType="newPassword" // em caso de ios
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                formRef.current.submitForm()
+              }}
+            />
             <TextCustomFont style={{ color: '#00FF00' }}>
               Professor
             </TextCustomFont>

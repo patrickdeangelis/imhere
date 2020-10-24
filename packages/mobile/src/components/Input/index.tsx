@@ -1,4 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef
+} from 'react'
 import { TextInputProps } from 'react-native'
 import { useField } from '@unform/core'
 import { CustomTextInput } from '../../global/styles'
@@ -10,17 +15,32 @@ interface InputProps extends TextInputProps {
 interface InputValueReference {
   value: string
 }
-
-const Input: React.FC<InputProps> = ({ name, icon, ...rest }: InputProps) => {
+interface InputRef {
+  focus(): void
+}
+const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
+  { name, icon, ...rest }: InputProps,
+  ref
+) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const inputElementRef = useRef<any>(null)
   const { registerField, defaultValue = '', fieldName, error } = useField(name)
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue })
+
+  useImperativeHandle(ref, () => {
+    return {
+      focus() {
+        inputElementRef.current.focus()
+      }
+    }
+  })
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setValue(ref: any, value: string) {
         inputValueRef.current.value = value
         inputElementRef.current.setNativeProps({ text: value })
@@ -33,6 +53,7 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }: InputProps) => {
   }, [fieldName, registerField])
   return (
     <CustomTextInput
+      ref={inputElementRef}
       keyboardAppearance="dark"
       defaultValue={defaultValue}
       onChangeText={value => {
@@ -43,4 +64,4 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }: InputProps) => {
   )
 }
 
-export default Input
+export default forwardRef(Input)

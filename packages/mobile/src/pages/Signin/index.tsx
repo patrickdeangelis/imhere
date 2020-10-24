@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, TextInput } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
@@ -12,6 +12,7 @@ import { Container, RegisterButton } from './styles'
 const SignIn: React.FC = () => {
   const navigation = useNavigation()
   const formRef = useRef<FormHandles>(null)
+  const passwordInputRef = useRef<TextInput>(null)
   // eslint-disable-next-line @typescript-eslint/ban-types
   const handleSignIn = useCallback((data: object) => {
     console.log(data)
@@ -26,8 +27,27 @@ const SignIn: React.FC = () => {
         <Logo />
         <View>
           <Form ref={formRef} onSubmit={handleSignIn}>
-            <Input name="Email" placeholder="Email" />
-            <Input name="Senha" placeholder="Senha" secureTextEntry />
+            <Input
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              name="Email"
+              placeholder="Email"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                passwordInputRef.current.focus()
+              }}
+            />
+            <Input
+              ref={passwordInputRef}
+              name="Senha"
+              placeholder="Senha"
+              secureTextEntry
+              returnKeyType="send"
+              onSubmitEditing={() => {
+                formRef.current.submitForm()
+              }}
+            />
             <Button
               title="Login"
               onPress={() => {
