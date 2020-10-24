@@ -30,7 +30,10 @@ const SignIn: React.FC = () => {
             <Input name="Senha" placeholder="Senha" secureTextEntry />
             <Button
               title="Login"
-              onPress={() => { formRef.current?.submitForm() }}>
+              onPress={() => {
+                formRef.current.submitForm()
+              }}
+            >
               Login
             </Button>
           </Form>

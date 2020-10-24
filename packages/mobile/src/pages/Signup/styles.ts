@@ -11,16 +11,9 @@ export const Container = styled(BaseContainer)`
 export const RegisterButton = styled.TouchableHighlight`
   margin-top: 20px;
 `
-export const SwitchOption = styled.Switch`
-  margin-bottom: 20px;
-`
+
 export const Title = styled.View`
   margin-bottom: 20px;
   justify-content: center;
   align-items: center;
-`
-export const TeacherOption = styled.View`
-  margin-bottom: 20px;
-  justify-content: center;
-  align-items: baseline;
 `

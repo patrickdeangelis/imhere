@@ -12,6 +12,7 @@ interface InputValueReference {
 }
 
 const Input: React.FC<InputProps> = ({ name, icon, ...rest }: InputProps) => {
+  const inputElementRef = useRef<any>(null)
   const { registerField, defaultValue = '', fieldName, error } = useField(name)
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue })
 
@@ -19,7 +20,15 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }: InputProps) => {
     registerField({
       name: fieldName,
       ref: inputValueRef.current,
-      path: 'value'
+      path: 'value',
+      setValue(ref: any, value: string) {
+        inputValueRef.current.value = value
+        inputElementRef.current.setNativeProps({ text: value })
+      },
+      clearValue() {
+        inputValueRef.current.value = ''
+        inputElementRef.current.clear()
+      }
     })
   }, [fieldName, registerField])
   return (

@@ -1,24 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import { View, ScrollView } from 'react-native'
 import { Form } from '@unform/mobile'
-
+import { FormHandles } from '@unform/core'
 import { useNavigation } from '@react-navigation/native'
 import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 import Input from '../../components/Input'
+import Switch from '../../components/Switch'
 import { TextCustomFont, CustomTextInput } from '../../global/styles'
-import {
-  Container,
-  RegisterButton,
-  SwitchOption,
-  Title,
-  TeacherOption
-} from './styles'
+import { Container, RegisterButton, Title } from './styles'
 
 const SignUp: React.FC = () => {
   const navigation = useNavigation()
-  const [isEnabled, setIsEnabled] = useState(false)
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState)
+  const formRef = useRef<FormHandles>(null)
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const handleSignIn = useCallback((data: object) => {
+    console.log(data)
+  }, [])
+
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
@@ -33,24 +32,27 @@ const SignUp: React.FC = () => {
               Cadastro
             </TextCustomFont>
           </Title>
-          <Form onSubmit={() => ''}>
+          <Form
+            ref={formRef}
+            onSubmit={data => {
+              console.log(data)
+            }}
+          >
             <Input name="Nome" placeholder="Nome" />
             <Input name="Email" placeholder="Email" />
             <Input name="Senha" placeholder="Senha" secureTextEntry />
-            <TeacherOption>
-              <TextCustomFont style={{ color: '#00FF00' }}>
-                Professor
-              </TextCustomFont>
-              <SwitchOption
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                thumbColor={isEnabled ? '#00FF00' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
-              />
-            </TeacherOption>
-            <Button title="Cadastrar" onPress={() => console.log('Cadastro')}>
-              Casastrar
+            <TextCustomFont style={{ color: '#00FF00' }}>
+              Professor
+            </TextCustomFont>
+            <Switch name="SwitchOption"></Switch>
+            <Button
+              title="Cadastrar"
+              onPress={() => {
+                formRef.current.submitForm()
+                // console.log(isEnabled)
+              }}
+            >
+              Cadastrar
             </Button>
           </Form>
           <RegisterButton
