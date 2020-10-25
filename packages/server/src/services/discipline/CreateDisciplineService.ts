@@ -20,7 +20,8 @@ class CreateDisciplineService {
     description,
     workloader,
     professor,
-    id }: Request): Promise<Discipline> {
+    id
+  }: Request): Promise<Discipline> {
 
     const userRepo = getRepository(User)
     const SjRepo = getRepository(Discipline)

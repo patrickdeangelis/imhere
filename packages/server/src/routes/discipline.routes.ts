@@ -1,13 +1,13 @@
 import { response, Router } from "express"
-import CreateDisciplineService from "../services/discipline_services/CreateDisciplineService"
-import DeleteDisciplineService from "../services/discipline_services/DeleteDisciplineService"
-import AlterDisciplineService from "../services/discipline_services/AlterDisciplineService"
+import CreateDisciplineService from "../services/discipline/CreateDisciplineService"
+import DeleteDisciplineService from "../services/discipline/DeleteDisciplineService"
+import AlterDisciplineService from "../services/discipline/AlterDisciplineService"
 import Discipline from '../models/Discipline'
 import { getRepository } from 'typeorm'
 import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 
 
-const disciplineRouter= Router()
+const disciplineRouter = Router()
 disciplineRouter.use(ensureAuthenticated)
 
 disciplineRouter.get('/', async (request, response) => {
@@ -36,7 +36,7 @@ disciplineRouter.post("/add", (request, response) => {
 })
 
 disciplineRouter.delete('/remove/:id', async (request, response) => {
-  try{
+  try {
     const id = request.params.id
     const deleteDiscipline = new DeleteDisciplineService()
     const deleted = await deleteDiscipline.execute({ id })
@@ -49,9 +49,9 @@ disciplineRouter.delete('/remove/:id', async (request, response) => {
 })
 
 disciplineRouter.put("/update/:id", async (request, response) => {
-  try{
+  try {
     const id = request.params.id
-    const {discipline, description, workloader} = request.body
+    const { discipline, description, workloader } = request.body
     const alterDiscipline = new AlterDisciplineService()
     const disciplineUpdated = await alterDiscipline.execute({ id, discipline, description, workloader })
 

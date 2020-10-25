@@ -1,7 +1,7 @@
 import { response, Router } from 'express'
-import CreateUserService from '../services/user_services/CreateUserService'
-import DeleteUserService from '../services/user_services/DeleteUserService'
-import AlterUserService from '../services/user_services/AlterUserService'
+import CreateUserService from '../services/user/CreateUserService'
+import DeleteUserService from '../services/user/DeleteUserService'
+import AlterUserService from '../services/user/AlterUserService'
 import ensureAuthenticated from '../middlewares/ensureAuthenticated'
 
 const userRoutes = Router()
@@ -44,7 +44,7 @@ userRoutes.delete('/delete-account/:id', async (request, response) => {
 userRoutes.put('/update/:id', (request, response) => {
   try {
     const id = request.params.id
-    const {name, email, isProfessor, password} = request.body
+    const { name, email, isProfessor, password } = request.body
     const alterUser = new AlterUserService()
     const user = alterUser.execute({
       id,
@@ -55,7 +55,7 @@ userRoutes.put('/update/:id', (request, response) => {
     })
 
     return response.json(user)
-  }catch {
+  } catch {
     return response.status(400).json({ error: err.message })
   }
 

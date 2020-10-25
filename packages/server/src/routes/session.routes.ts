@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import SessionUserService from '../services/sessions_services/SessionUserService'
+import SessionUserService from '../services/sessions/SessionUserService'
 
 const sessionRoutes = Router()
 
