@@ -10,7 +10,7 @@ import {
   JoinTable,
   Unique,
 } from 'typeorm'
-import { SchoolSubject } from './SchoolSubject'
+import { Discipline } from './Discipline'
 import { Presence } from './Presence'
 
 @Entity()
@@ -30,15 +30,15 @@ export class User {
   @Column()
   isProfessor: boolean
 
-  @OneToMany(type => SchoolSubject, schoolSubject => schoolSubject.professor)
-  schoolSubject: SchoolSubject
+  @OneToMany(type => Discipline, discipline => discipline.professor)
+  discipline: Discipline
 
   @OneToMany(type => Presence, presence => presence.user)
   presence: Presence
   
-  @ManyToMany(type => SchoolSubject, registered => registered.student)
+  @ManyToMany(type => Discipline, registered => registered.student)
   @JoinTable()
-  registered: SchoolSubject
+  registered: Discipline
 
   @CreateDateColumn()
   created_at: Date

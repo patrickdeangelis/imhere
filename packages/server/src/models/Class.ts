@@ -5,30 +5,31 @@ import {
   UpdateDateColumn,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  Timestamp
 } from 'typeorm'
-import { SchoolSubject } from './SchoolSubject'
+import Discipline from './Discipline'
 import { Presence } from './Presence'
 
 @Entity()
 export class Class {
   @PrimaryGeneratedColumn('uuid')
-  id_class: number
-
+  id_class: string
+  
   @Column('date')
   date_class: Date
 
   @Column('time with time zone')
-  start_class: string
+  start_class: Date
 
-  @Column('time without time zone')
-  finish_class: string
+  @Column('time with time zone')
+  finish_class: Date
 
   @Column()
   tolerance: number
 
-  @ManyToOne(type => SchoolSubject, schoolSubject => schoolSubject.classes, { onDelete: "CASCADE" })
-  schoolSubject: SchoolSubject
+  @ManyToOne(type => Discipline, discipline => discipline.classes, { nullable: true, onDelete: "CASCADE" })
+  discipline: Discipline
 
   @OneToMany(type => Presence, presence => presence.classes)
   presence: Presence
