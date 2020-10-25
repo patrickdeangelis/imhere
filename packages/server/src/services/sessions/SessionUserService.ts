@@ -19,6 +19,7 @@ class SessionUserService {
     const user = await userRepo.findOne({
       where: { email }
     })
+
     if (!user) {
       throw new Error('Email incorret/Password incorret')
     }

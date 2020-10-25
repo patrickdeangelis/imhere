@@ -26,7 +26,7 @@ disciplineRouter.post("/add", (request, response) => {
       description,
       workloader
     })
-    // const { id_s }
+
     return response.json(newDiscipline)
   }
 
@@ -43,7 +43,7 @@ disciplineRouter.delete('/remove/:id', async (request, response) => {
 
     return response.json(deleted)
 
-  } catch {
+  } catch (err) {
     return response.status(400).json({ error: err.message })
   }
 })

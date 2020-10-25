@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import userRoutes from './user.routes'
 import sessionRoutes from './session.routes'
-import disciplineRouter from './Discipline.routes'
+import disciplineRouter from './discipline.routes'
 const routes = Router()
 
 routes.use('/users', userRoutes)

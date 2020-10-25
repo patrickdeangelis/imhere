@@ -12,9 +12,10 @@ interface Response {
 
 class DeleteUserService {
   public async execute({ id, password }: Request): Promise<Response> {
-    const userRepo = getRepository(User)
-    const checkUser = await userRepo.findOne({ where: { id_user: id } })
-    if(!checkUser){
+    const userRepository = getRepository(User)
+    const checkUser = await userRepository.findOne({ where: { id_user: id } })
+
+    if (!checkUser) {
       throw new Error('Error to find user in database')
     }
     const checkPassword = await compare(password, checkUser.password)
@@ -23,7 +24,7 @@ class DeleteUserService {
     }
 
     try {
-      await userRepo.remove(checkUser)
+      await userRepository.remove(checkUser)
     } catch {
       throw new Error('Error to delete user...')
     }

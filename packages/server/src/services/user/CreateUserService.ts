@@ -16,8 +16,8 @@ class CreateUserService {
     isProfessor,
     password
   }: Request): Promise<User> {
-    const userRepo = getRepository(User)
-    const checkUser = await userRepo.findOne({
+    const userRepository = getRepository(User)
+    const checkUser = await userRepository.findOne({
       where: { email }
     })
 
@@ -26,14 +26,14 @@ class CreateUserService {
     }
 
     const hashPass = await hash(password, 12)
-    const user = userRepo.create({
+    const user = userRepository.create({
       name,
       email,
       isProfessor,
       password: hashPass
     })
 
-    await userRepo.save(user)
+    await userRepository.save(user)
 
     return user
   }

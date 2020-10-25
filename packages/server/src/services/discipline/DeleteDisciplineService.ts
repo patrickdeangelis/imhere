@@ -7,16 +7,16 @@ interface Request {
 interface Response {
   deleted: boolean
 }
-class DeleteDisciplineService{
-  public async execute({ id }: Request): Promise<Response>  {
-    const SjRepo = getRepository(Discipline)
-    const discipline = await SjRepo.findOne({ where: {  id  }})
-    if(!discipline){
+class DeleteDisciplineService {
+  public async execute({ id }: Request): Promise<Response> {
+    const disciplineRepository = getRepository(Discipline)
+    const discipline = await disciplineRepository.findOne({ where: { id } })
+    if (!discipline) {
       throw new Error('Error to find discipline in database')
     }
 
     try {
-      await SjRepo.remove(discipline);
+      await disciplineRepository.remove(discipline);
     } catch {
       throw new Error('Error to delete user...')
     }

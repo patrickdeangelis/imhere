@@ -17,19 +17,19 @@ class CreateClassService {
     date_class,
     start_class,
     finish_class,
-    tolerance}: Request): Promise<Class> {
-      const classRepo = getRepository(Class)
-      
-      const newClass = classRepo.create({
-        date_class,
-        start_class,
-        finish_class,
-        tolerance,
-        discipline
-      })
+    tolerance }: Request): Promise<Class> {
+    const classRepository = getRepository(Class)
 
-      classRepo.save(newClass)
+    const newClass = classRepository.create({
+      date_class,
+      start_class,
+      finish_class,
+      tolerance,
+      discipline
+    })
 
-      return newClass
+    await classRepository.save(newClass)
+
+    return newClass
   }
 }

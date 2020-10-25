@@ -4,12 +4,10 @@ import { getRepository } from "typeorm"
 import randomstring from 'randomstring'
 
 interface Request {
-  id: String
   email: String
   discipline: String
   description: String
   workloader: Number
-  professor: String
 }
 
 class CreateDisciplineService {
@@ -19,14 +17,12 @@ class CreateDisciplineService {
     discipline,
     description,
     workloader,
-    professor,
-    id
   }: Request): Promise<Discipline> {
 
-    const userRepo = getRepository(User)
-    const SjRepo = getRepository(Discipline)
+    const userRepository = getRepository(User)
+    const disciplineRepository = getRepository(Discipline)
 
-    const checkUserEmail = await userRepo.findOne({
+    const checkUserEmail = await userRepository.findOne({
       where: { email }
     })
 
@@ -40,10 +36,11 @@ class CreateDisciplineService {
     const codeSchool = randomstring.generate({
       length: 6,
       charset: 'alphabetic'
-    });
+    }) as string;
+
     const professorOwen = checkUserEmail.id_user
 
-    const newDiscipline = SjRepo.create({
+    const newDiscipline = disciplineRepository.create({
       id_discipline: codeSchool,
       description,
       discipline,
@@ -51,7 +48,7 @@ class CreateDisciplineService {
       professor: professorOwen
     })
 
-    await SjRepo.save(newDiscipline)
+    await disciplineRepository.save(newDiscipline)
     console.log(newDiscipline)
     return newDiscipline
   }
