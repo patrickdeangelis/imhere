@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/native'
 import React, { useCallback, useRef } from 'react'
-import { View, ScrollView, TextInput } from 'react-native'
+import { View, ScrollView, TextInput, Alert } from 'react-native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
-import { useNavigation } from '@react-navigation/native'
+import * as Yup from 'yup'
+import getErrorsValidation from '../../util/getErrosValidation'
 import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 import Input from '../../components/Input'
@@ -15,9 +17,42 @@ const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const emailInputRef = useRef<TextInput>(null)
   const passwordInputRef = useRef<TextInput>(null)
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  const handleSignIn = useCallback((data: object) => {
-    console.log(data)
+  interface SignUpForm {
+    name: string
+    email: string
+    password: string
+  }
+  const handleSignUp = useCallback(async (data: SignUpForm) => {
+    try {
+      formRef.current.setErrors({})
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório'),
+        email: Yup.string()
+          .email('Digite um email valido')
+          .required('Email obrigatório'),
+        password: Yup.string().min(6, 'No minimo 6 digitos')
+      })
+      await schema.validate(data, {
+        abortEarly: false
+      })
+      console.log(data)
+      // await SignIn({
+      //   email: data.email
+      //   password: data.password
+      // })
+      // history.push('/mainPage')
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getErrorsValidation(err)
+        formRef.current.setErrors(errors)
+        console.log(errors)
+        return
+      }
+      Alert.alert(
+        'Erro na autenticação',
+        'Ocorreu um erro no login, cheque as credenciais'
+      )
+    }
   }, [])
 
   return (
@@ -34,15 +69,10 @@ const SignUp: React.FC = () => {
               Cadastro
             </TextCustomFont>
           </Title>
-          <Form
-            ref={formRef}
-            onSubmit={data => {
-              console.log(data)
-            }}
-          >
+          <Form ref={formRef} onSubmit={handleSignUp}>
             <Input
               autoCapitalize="words"
-              name="Nome"
+              name="name"
               placeholder="Nome"
               returnKeyType="next"
               onSubmitEditing={() => {
@@ -54,7 +84,7 @@ const SignUp: React.FC = () => {
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="email-address"
-              name="Email"
+              name="email"
               placeholder="Email"
               returnKeyType="next"
               onSubmitEditing={() => {
@@ -63,7 +93,7 @@ const SignUp: React.FC = () => {
             />
             <Input
               ref={passwordInputRef}
-              name="Senha"
+              name="password"
               placeholder="Senha"
               secureTextEntry
               textContentType="newPassword" // em caso de ios

@@ -1,4 +1,6 @@
 import React, {
+  useState,
+  useCallback,
   useEffect,
   useRef,
   useImperativeHandle,
@@ -6,6 +8,7 @@ import React, {
 } from 'react'
 import { TextInputProps } from 'react-native'
 import { useField } from '@unform/core'
+import { Container } from './styles'
 import { CustomTextInput } from '../../global/styles'
 
 interface InputProps extends TextInputProps {
@@ -26,6 +29,15 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
   const inputElementRef = useRef<any>(null)
   const { registerField, defaultValue = '', fieldName, error } = useField(name)
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue })
+
+  const [isFocused, setFocused] = useState(false)
+
+  const handleInputFocused = useCallback(() => {
+    setFocused(true)
+  }, [])
+  const handleInputBlur = useCallback(() => {
+    setFocused(false)
+  }, [])
 
   useImperativeHandle(ref, () => {
     return {
@@ -52,15 +64,19 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
     })
   }, [fieldName, registerField])
   return (
-    <CustomTextInput
-      ref={inputElementRef}
-      keyboardAppearance="dark"
-      defaultValue={defaultValue}
-      onChangeText={value => {
-        inputValueRef.current.value = value
-      }}
-      {...rest}
-    />
+    <Container isFocused={isFocused} isErrored={!!error}>
+      <CustomTextInput
+        ref={inputElementRef}
+        keyboardAppearance="dark"
+        defaultValue={defaultValue}
+        onFocus={handleInputFocused}
+        onBlur={handleInputBlur}
+        onChangeText={value => {
+          inputValueRef.current.value = value
+        }}
+        {...rest}
+      />
+    </Container>
   )
 }
 
