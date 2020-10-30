@@ -6,7 +6,7 @@ import { Container, RegisterButton } from './styles'
 import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 
-const MainPage: React.FC = () => {
+const Dashboard: React.FC = () => {
   const navigation = useNavigation()
   return (
     <Container>
@@ -29,4 +29,4 @@ const MainPage: React.FC = () => {
   )
 }
 
-export default MainPage
+export default Dashboard

@@ -25,7 +25,6 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
   { name, icon, ...rest }: InputProps,
   ref
 ) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const inputElementRef = useRef<any>(null)
   const { registerField, defaultValue = '', fieldName, error } = useField(name)
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue })
@@ -52,7 +51,6 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       setValue(ref: any, value: string) {
         inputValueRef.current.value = value
         inputElementRef.current.setNativeProps({ text: value })

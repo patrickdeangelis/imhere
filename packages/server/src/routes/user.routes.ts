@@ -36,7 +36,6 @@ userRoutes.delete('/delete-account/:id', async (request, response) => {
     })
 
     return response.json(deleted)
-
   } catch (err) {
     return response.status(400).json({ error: err.message })
   }
@@ -58,6 +57,5 @@ userRoutes.put('/update/:id', (request, response) => {
   } catch (err) {
     return response.status(400).json({ error: err.message })
   }
-
 })
 export default userRoutes

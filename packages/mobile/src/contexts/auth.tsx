@@ -1,9 +1,9 @@
 import React, {
   createContext,
-  useCallback,
-  useContext,
+  useEffect,
   useState,
-  useEffect
+  useCallback,
+  useContext
 } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 import api from '../services/api'
@@ -22,10 +22,8 @@ interface AuthContextData {
   signIn(credentials: SignInCredentials): Promise<void>
   singOut(): void
 }
-
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
-
-const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState)
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
@@ -55,15 +53,13 @@ const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.multiRemove(['@imhere:token', '@imhere:user'])
     setData({} as AuthState)
   }, [])
-
   return (
     <AuthContext.Provider value={{ user: data.user, signIn, singOut }}>
       {children}
     </AuthContext.Provider>
   )
 }
-
-function useAuth(): AuthContextData {
+export function useAuth(): AuthContextData {
   const context = useContext(AuthContext)
   if (!context) {
     throw Error('useAuth must be used within an AuthProvider')
@@ -71,4 +67,4 @@ function useAuth(): AuthContextData {
   return context
 }
 
-export { AuthProvider, useAuth }
+export default AuthContext

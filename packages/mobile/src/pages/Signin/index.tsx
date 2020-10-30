@@ -1,16 +1,10 @@
-import React, { useCallback, useRef } from 'react'
-import {
-  View,
-  ScrollView,
-  TextInput,
-  Alert,
-  ActivityIndicator,
-  SafeAreaView
-} from 'react-native'
+import React, { useCallback, useRef, useContext } from 'react'
+import { View, ScrollView, TextInput, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Form } from '@unform/mobile'
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
+import AuthContext from '../../contexts/auth'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Logo from '../../components/Logo'
@@ -27,43 +21,42 @@ const SignIn: React.FC = () => {
   const navigation = useNavigation()
   const formRef = useRef<FormHandles>(null)
   const passwordInputRef = useRef<TextInput>(null)
+  const { signIn } = useContext(AuthContext)
 
-  const handleSignIn = useCallback(async (data: SignInForm) => {
-    // const data = {
-    //   email,
-    //   password
-    // }
-    try {
-      formRef.current.setErrors({})
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('Digite um email valido')
-          .required('Email obrigatório'),
-        password: Yup.string().required('Senha obrigatória')
-      })
-      await schema.validate(data, {
-        abortEarly: false
-      })
-      console.log(data)
-      // await SignIn({
-      //   email: data.email
-      //   password: data.password
-      // })
-      // history.push('/mainPage')
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getErrorsValidation(err)
-        formRef.current.setErrors(errors)
-        console.log(errors)
-        return
+  const handleSignIn = useCallback(
+    async (data: SignInForm) => {
+      try {
+        formRef.current.setErrors({})
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .email('Digite um email valido')
+            .required('Email obrigatório'),
+          password: Yup.string().required('Senha obrigatória')
+        })
+        await schema.validate(data, {
+          abortEarly: false
+        })
+
+        await signIn({
+          email: data.email,
+          password: data.password
+        })
+        console.log('logado')
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getErrorsValidation(err)
+          formRef.current.setErrors(errors)
+          return
+        }
+
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um erro no login, cheque as credenciais'
+        )
       }
-
-      Alert.alert(
-        'Erro na autenticação',
-        'Ocorreu um erro no login, cheque as credenciais'
-      )
-    }
-  }, [])
+    },
+    [signIn]
+  )
   return (
     <ScrollView
       keyboardShouldPersistTaps="handled"
