@@ -17,7 +17,7 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <Routes></Routes>
+        <Routes />
       </AuthProvider>
     </NavigationContainer>
   )

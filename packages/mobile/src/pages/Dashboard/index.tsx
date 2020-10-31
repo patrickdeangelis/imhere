@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { TextCustomFont, CustomTextInput } from '../../global/styles'
+import AuthContext from '../../contexts/auth'
+import { TextCustomFont } from '../../global/styles'
 import { Container, RegisterButton } from './styles'
-import Button from '../../components/Button'
 import Logo from '../../components/Logo'
 
 const Dashboard: React.FC = () => {
   const navigation = useNavigation()
+  const { singOut } = useContext(AuthContext)
   return (
     <Container>
       <View />
@@ -18,7 +19,7 @@ const Dashboard: React.FC = () => {
         </TextCustomFont>
         <RegisterButton
           onPress={() => {
-            navigation.navigate('SignUp')
+            singOut()
           }}
         >
           <TextCustomFont style={{ color: '#00FF00' }}>Logout</TextCustomFont>
