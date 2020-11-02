@@ -21,3 +21,7 @@ export const CustomTextInput = styled.TextInput.attrs({
   margin-top: 5px;
   margin-bottom: 5px;
 `
+export const TitleView = styled.View`
+  flex-direction: row;
+  align-items: center;
+`

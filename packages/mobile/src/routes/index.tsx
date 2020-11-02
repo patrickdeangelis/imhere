@@ -1,13 +1,15 @@
 import React from 'react'
-import { View, ActivityIndicator } from 'react-native'
-import { AppLoading } from 'expo'
 import AuthRoutes from './auth.routes'
 import AppRoutes from './app.routes'
 import { useAuth } from '../contexts/auth'
 
+interface ProfessorType {
+  isProfessor: boolean
+}
 const Routes: React.FC = () => {
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
   console.log(user)
+
   // if (loading) {
   //   return (
   //     <AppLoading></AppLoading>
@@ -24,7 +26,6 @@ const Routes: React.FC = () => {
   //     // </View>
   //   )
   // }
-
   return user ? <AppRoutes /> : <AuthRoutes />
 }
 
