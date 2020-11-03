@@ -19,9 +19,9 @@ const DashboardStudent: React.FC = () => {
             singOut()
           }}
         >
-          <Icon name="close-o" color="#00FF00" size={70}></Icon>
+          <Icon name="close-o" color="#00FF00" size={50}></Icon>
         </RegisterButton>
-        <Logo />
+        <Logo width={250} />
       </TitleView>
       <View>
         <TextCustomFont
