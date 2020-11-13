@@ -123,7 +123,7 @@ const Discipline: React.FC = () => {
               autoCorrect={false}
               keyboardType="email-address"
               name="email"
-              placeholder="Carga horaria"
+              placeholder="Email de confirmação"
               returnKeyType="next"
               onSubmitEditing={() => {
                 workInputRef.current.focus()
